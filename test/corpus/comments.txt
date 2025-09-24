@@ -1,0 +1,39 @@
+=================================
+Block comments
+=================================
+
+/* Single line */
+
+/*
+ * Multi-line
+ */
+
+ /*   
+  Still multi-line   
+  */
+
+---
+
+(source_file
+  (block_comment)
+  (block_comment)
+  (block_comment)
+)
+
+=================================
+Line comments
+=================================
+
+// Comment
+
+/// Still a comment
+
+//
+
+---
+
+(source_file
+  (line_comment)
+  (line_comment)
+  (line_comment)
+)

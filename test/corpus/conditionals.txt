@@ -1,0 +1,230 @@
+=================================
+if/ifx statements
+=================================
+
+if (true) { foo(); }
+if true { foo(); }
+if true foo();
+if (true) then foo();
+if true then foo();
+if x == 0 foo();
+
+ifx (true) { foo(); }
+ifx true then foo();
+
+---
+
+(source_file
+  (if_statement
+    (condition
+      (boolean_literal))
+    (call_expression
+      (identifier)
+      (arguments)))
+
+  (if_statement
+    (condition
+      (boolean_literal))
+    (call_expression
+      (identifier)
+      (arguments)))
+  
+  (if_statement
+    (condition
+      (boolean_literal))
+    (call_expression
+      (identifier)
+      (arguments)))
+  
+  (if_statement
+    (condition
+      (boolean_literal))
+    (call_expression
+      (identifier)
+      (arguments)))
+  
+  (if_statement
+    (condition
+      (boolean_literal))
+    (call_expression
+      (identifier)
+      (arguments)))
+  
+  (if_statement
+    (condition
+      (binary_expression
+      (identifier)
+      (integer_literal)))
+    (call_expression
+      (identifier)
+      (arguments)))
+
+  (if_statement
+    (condition
+      (boolean_literal))
+    (call_expression
+      (identifier)
+      (arguments)))
+  
+  (if_statement
+    (condition
+      (boolean_literal))
+    (call_expression
+      (identifier)
+      (arguments)))
+)
+
+=================================
+if/ifx/else/else if statements
+=================================
+
+if (true) {
+  foo();
+} else {
+  foo();
+}
+
+if true then foo(); else foo();
+
+if (true) {
+  if x == 0 then {
+    foo();
+  } else {
+    foo();
+  }
+} else foo();
+
+if (a) {
+  // Foo
+} else if (b) {
+  // Foo
+} else if (c) {
+  // Foo
+} else {
+  // Foo
+}
+
+if a {
+  // Foo
+} else if b {
+  // Foo
+} else if c {
+  // Foo
+} else {
+  // Foo
+}
+
+ifx (true) {
+  foo();
+} else {
+  foo();
+}
+
+---
+
+(source_file
+  (if_statement
+    (condition 
+      (boolean_literal))
+    (call_expression
+      (identifier)
+      (arguments))
+    (else_clause
+      (call_expression
+        (identifier)
+        (arguments))))
+
+  (if_statement
+    (condition 
+      (boolean_literal))
+    (call_expression
+      (identifier)
+      (arguments))
+    (else_clause
+      (call_expression
+        (identifier)
+        (arguments))))
+ 
+  (if_statement
+    (condition
+      (boolean_literal))
+    (if_statement
+      (condition
+        (binary_expression
+          (identifier)
+          (integer_literal)))
+      (call_expression
+        (identifier)
+        (arguments))
+      (else_clause
+        (call_expression
+          (identifier)
+          (arguments))))
+    (else_clause
+      (call_expression
+        (identifier)
+        (arguments))))
+
+  (if_statement
+    (condition
+      (identifier))
+    (line_comment)
+    (else_clause
+      (if_statement
+        (condition
+          (identifier))
+        (line_comment)
+        (else_clause
+          (if_statement
+            (condition
+              (identifier))
+            (line_comment)
+            (else_clause
+              (line_comment)))))))
+ 
+  (if_statement
+    (condition
+      (identifier))
+    (line_comment)
+    (else_clause
+      (if_statement
+        (condition
+          (identifier))
+        (line_comment)
+        (else_clause
+          (if_statement
+            (condition
+              (identifier))
+            (line_comment)
+            (else_clause
+              (line_comment)))))))
+  (if_statement
+    (condition 
+      (boolean_literal))
+    (call_expression
+      (identifier)
+      (arguments))
+    (else_clause
+      (call_expression
+        (identifier)
+        (arguments))))
+)
+
+=================================
+If/case statements
+:skip
+TODO: Need to handle `== {`
+=================================
+
+if #complete a == {
+  case 1; foo();
+  case 2; #through;
+  case 3; #through;
+  case 4; foo();
+  case; foo();
+}
+
+---
+
+(source_file
+)

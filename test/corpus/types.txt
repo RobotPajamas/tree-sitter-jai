@@ -1,0 +1,35 @@
+=================================
+Primitive Types
+=================================
+
+a : bool;
+a : int;
+a : float;
+a : u8;
+a : u16;
+a : u32;
+a : u64;
+a : s8;
+a : s16;
+a : s32;
+a : s64;
+a : float32;
+a : float64;
+
+---
+
+(source_file
+  (identifier) (primitive_type)
+  (identifier) (primitive_type)
+  (identifier) (primitive_type)
+  (identifier) (primitive_type)
+  (identifier) (primitive_type)
+  (identifier) (primitive_type)
+  (identifier) (primitive_type)
+  (identifier) (primitive_type)
+  (identifier) (primitive_type)
+  (identifier) (primitive_type)
+  (identifier) (primitive_type)
+  (identifier) (primitive_type)
+  (identifier) (primitive_type)
+)

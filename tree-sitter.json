@@ -9,6 +9,9 @@
       "file-types": [
         "jai"
       ],
+      "highlights": [
+        "queries/highlights.scm"
+      ],
       "injection-regex": "^jai$",
       "class-name": "TreeSitterJai"
     }

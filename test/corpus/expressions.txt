@@ -1,0 +1,119 @@
+=================================
+Bitwise Operations
+=================================
+
+a & b;
+a | b;
+a << b;
+a >> b;
+
+---
+
+(source_file
+  (binary_expression
+    (identifier)
+    (identifier))
+  (binary_expression
+    (identifier)
+    (identifier))
+  (binary_expression
+    (identifier)
+    (identifier))
+  (binary_expression
+    (identifier)
+    (identifier)))
+
+=================================
+Unary Operations
+=================================
+
+!a;
+~a;
+-a;
++a;
+
+---
+
+(source_file
+  (unary_expression
+    (identifier))
+  (unary_expression
+    (identifier))
+  (unary_expression
+    (identifier))
+  (unary_expression
+    (identifier)))
+
+
+=================================
+Assignments Operations
+=================================
+
+a = b;
+a += b;
+a -= b;
+a *= b;
+a /= b;
+a %= b;
+a <<= b;
+a >>= b;
+a &= b;
+a |= b;
+a ^= b;
+
+---
+
+(source_file
+  (assignment_expression
+    (identifier)
+    (identifier))
+  (assignment_expression
+    (identifier)
+    (identifier))
+  (assignment_expression
+    (identifier)
+    (identifier))
+  (assignment_expression
+    (identifier)
+    (identifier))
+  (assignment_expression
+    (identifier)
+    (identifier))
+  (assignment_expression
+    (identifier)
+    (identifier))
+  (assignment_expression
+    (identifier)
+    (identifier))
+  (assignment_expression
+    (identifier)
+    (identifier))
+  (assignment_expression
+    (identifier)
+    (identifier))
+  (assignment_expression
+    (identifier)
+    (identifier))
+  (assignment_expression
+    (identifier)
+    (identifier)))
+
+=================================
+Range Operations
+:skip
+=================================
+
+1 .. 2
+1..2
+
+---
+
+(source_file
+  (range_expression
+    (integer_literal)
+    (integer_literal))
+  
+  (range_expression
+    (integer_literal)
+    (integer_literal))
+)

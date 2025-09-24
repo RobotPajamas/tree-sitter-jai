@@ -1,0 +1,79 @@
+=================================
+Import declarations
+=================================
+
+#import "Basic";
+
+Basic :: #import "Basic";
+
+using Basic :: #import "Basic";
+
+File :: #import,file "files/file.jai";
+Dir :: #import,dir "files";
+#import,string "factorial :: ";
+
+---
+
+(source_file
+  (import_declaration
+    (string_literal
+      (string_content)))
+
+  (import_declaration
+    (identifier)
+    (string_literal
+      (string_content)))
+
+  (import_declaration
+    (identifier)
+    (string_literal
+      (string_content)))
+
+  (import_declaration
+    (identifier)
+    (string_literal
+      (string_content)))
+
+  (import_declaration
+    (identifier)
+    (string_literal
+      (string_content)))
+
+  (import_declaration
+    (string_literal
+      (string_content)))
+)
+
+=================================
+Procedure definitions
+:skip
+=================================
+
+main :: () {}
+
+foo :: (a: int) {}
+
+foo :: () -> int {}
+
+foo :: (a: int) -> int {}
+
+foo :: (a: int = 9, b: string = "hello", c := 4, d := "world") -> int, string {}
+
+---
+
+(source_file
+  (procedure_declaration
+    (identifier)
+    (parameters))
+  (procedure_declaration
+    (identifier)
+    (parameters
+      (parameter
+        (identifier)
+        (primitive_type))))
+  (procedure_declaration
+    (identifier)
+    (parameters)
+    (return_type
+      (primitive_type)))
+)
