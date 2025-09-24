@@ -661,7 +661,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_const_declaration"
+          "name": "const_declaration"
         },
         {
           "type": "SYMBOL",
@@ -733,7 +733,7 @@
                 },
                 {
                   "type": "FIELD",
-                  "name": "kind",
+                  "name": "modifier",
                   "content": {
                     "type": "CHOICE",
                     "members": [
@@ -769,7 +769,7 @@
         }
       ]
     },
-    "_const_declaration": {
+    "const_declaration": {
       "type": "SEQ",
       "members": [
         {
@@ -806,7 +806,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_expression"
         },
         {
           "type": "STRING",

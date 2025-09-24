@@ -218,7 +218,7 @@ module.exports = grammar({
 
     _declaration: ($) =>
       choice(
-        $._const_declaration,
+        $.const_declaration,
         $.procedure_declaration,
         $._variable_declaration,
         $.import_declaration,
@@ -226,21 +226,21 @@ module.exports = grammar({
 
     import_declaration: ($) =>
       seq(
-        optional("using"),
+        optional("using"), // TODO: Using should be a statement, as it has it's own modifiers as well (only/except/etc) and used in multiple places
         optional(seq(field("namespace", $.identifier), "::")),
         "#import",
-        optional(seq(",", field("kind", choice("file", "dir", "string")))),
+        optional(seq(",", field("modifier", choice("file", "dir", "string")))), // TODO: Not working in parse
         $.string_literal,
         ";",
       ),
 
-    _const_declaration: ($) =>
+    const_declaration: ($) =>
       seq(
         field("name", $.identifier),
         ":",
         optional(field("type", $._type)),
         ":",
-        $.identifier,
+        $._expression,
         ";",
       ),
 
