@@ -5,19 +5,8 @@ name: CI
 on:
   push:
     branches: [main, shenanigans]
-    paths:
-      - grammar.js
-      - src/**
-      - test/**
-      - bindings/**
-      - tree-sitter.json
-  pull_request: [main]
-    paths:
-      - grammar.js
-      - src/**
-      - test/**
-      - bindings/**
-      - tree-sitter.json
+  pull_request:
+    branches: [main]
 
 concurrency:
   group: ${{github.workflow}}-${{github.ref}}
