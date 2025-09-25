@@ -38,7 +38,7 @@ while j_loop := j < 2 {
 
   (while_statement
     (condition
-      (assignment_expression
+      (variable_declaration
         (identifier)
         (binary_expression
           (identifier)

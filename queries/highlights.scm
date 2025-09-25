@@ -1,11 +1,11 @@
-; Constants
-
-(const_declaration 
-  name: (identifier) @constant)
-
 ; Variables
 
 (identifier) @variable
+
+; Constants - order matter for specificity, this fails if above Variables
+
+(const_declaration 
+  name: (identifier) @constant)
 
 ; Imports
 
@@ -19,6 +19,9 @@
   ; modifier: (identifier) @keyword.modifier ; TODO: Not working
 )
 
+(struct_declaration
+  (identifier) @type)
+
 (procedure_declaration (identifier) @function)
 (call_expression
   procedure: (identifier) @function)
@@ -27,13 +30,14 @@
 ; Punctuation
 
 [
-  "("
-  ")"
-;  "["
-;  "]"
-  "{"
-  "}"
+  "(" ")"
+; "[" "]"
+  "{" "}"
 ] @punctuation.bracket
+
+[
+  ";"
+] @punctuation.delimiter
 
 ; Literals
 
@@ -42,7 +46,7 @@
 (float_literal) @number.float
 (string_literal) @string
 
-(primitive_type) @type.builtin
+(builtin_type) @type.builtin
 
 [
  (line_comment)
@@ -58,7 +62,6 @@
 ; Assignment operators
 [
   "="
-  ":="
   "*="
   "/="
   "%="
@@ -70,6 +73,11 @@
   "^="
   "|="
 ] @operator
+
+; TODO: Name this
+[
+":"
+] @operator ; Not sure if this is an operator or punctuation
 
 ; Unary/Binary expression operators
 [

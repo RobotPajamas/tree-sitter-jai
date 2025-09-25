@@ -19,17 +19,43 @@ a : float64;
 ---
 
 (source_file
-  (identifier) (primitive_type)
-  (identifier) (primitive_type)
-  (identifier) (primitive_type)
-  (identifier) (primitive_type)
-  (identifier) (primitive_type)
-  (identifier) (primitive_type)
-  (identifier) (primitive_type)
-  (identifier) (primitive_type)
-  (identifier) (primitive_type)
-  (identifier) (primitive_type)
-  (identifier) (primitive_type)
-  (identifier) (primitive_type)
-  (identifier) (primitive_type)
+  (variable_declaration
+    (identifier)
+    (builtin_type))
+  (variable_declaration
+    (identifier)
+    (builtin_type))
+  (variable_declaration
+    (identifier)
+    (builtin_type))
+  (variable_declaration
+    (identifier)
+    (builtin_type))
+  (variable_declaration
+    (identifier)
+    (builtin_type))
+  (variable_declaration
+    (identifier)
+    (builtin_type))
+  (variable_declaration
+    (identifier)
+    (builtin_type))
+  (variable_declaration
+    (identifier)
+    (builtin_type))
+  (variable_declaration
+    (identifier)
+    (builtin_type))
+  (variable_declaration
+    (identifier)
+    (builtin_type))
+  (variable_declaration
+    (identifier)
+    (builtin_type))
+  (variable_declaration
+    (identifier)
+    (builtin_type))
+  (variable_declaration
+    (identifier)
+    (builtin_type))
 )

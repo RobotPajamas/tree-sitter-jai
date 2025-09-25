@@ -1,4 +1,55 @@
 =================================
+Const declarations
+=================================
+
+a :: true;
+
+a : int : 1 + 2;
+
+---
+
+(source_file
+  (const_declaration
+    (identifier)
+    (boolean_literal))
+      
+  (const_type_declaration
+    (identifier)
+    (builtin_type)
+    (binary_expression
+      (integer_literal)
+      (integer_literal)))
+)
+
+=================================
+Var declarations
+=================================
+
+a : int;
+
+a := 123.456;
+
+a : int = "hello";
+
+---
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (builtin_type))
+
+  (variable_declaration
+    (identifier)
+    (float_literal))
+      
+  (variable_declaration
+    (identifier)
+    (builtin_type)
+    (string_literal
+      (string_content)))
+)
+
+=================================
 Import declarations
 =================================
 
@@ -45,7 +96,95 @@ Dir :: #import,dir "files";
 )
 
 =================================
-Procedure definitions
+Struct declarations
+=================================
+
+Foo :: struct {}
+
+Address :: struct {
+  street_name: string;
+  street_number: int = 123;
+  postal_code : string : "H0H 0H0";
+  country :: "Canada";
+  planet := "Earth";
+}
+
+---
+
+(source_file
+  (struct_declaration
+    (identifier))
+
+    (struct_declaration
+      (identifier)
+      (variable_declaration
+        (identifier)
+        (builtin_type))
+      (variable_declaration
+        (identifier)
+        (builtin_type)
+        (integer_literal))
+      (const_type_declaration
+        (identifier)
+        (builtin_type)
+        (string_literal
+          (string_content)))
+      (const_declaration
+        (identifier)
+        (string_literal
+          (string_content)))
+      (variable_declaration
+        (identifier)
+        (string_literal
+          (string_content))))
+)
+
+=================================
+Enum declarations
+=================================
+
+Colors :: enum {}
+
+Colors :: enum {
+  RED;
+  BLUE;
+  GREEN;
+}
+
+Colors :: enum u16 {
+  RED :: 0;
+  BLUE :: 1;
+  GREEN :: 2;
+}
+
+---
+
+(source_file
+  (enum_declaration
+    (identifier))
+
+  (enum_declaration
+    (identifier)
+    (identifier)
+    (identifier)
+    (identifier))
+
+  (enum_declaration
+    (identifier)
+    (builtin_type)
+    (const_declaration
+      (identifier)
+      (integer_literal))
+    (const_declaration
+      (identifier)
+      (integer_literal))
+    (const_declaration
+      (identifier)
+      (integer_literal)))
+)
+
+=================================
+Procedure declarations
 :skip
 =================================
 
@@ -70,10 +209,10 @@ foo :: (a: int = 9, b: string = "hello", c := 4, d := "world") -> int, string {}
     (parameters
       (parameter
         (identifier)
-        (primitive_type))))
+        (builtin_type))))
   (procedure_declaration
     (identifier)
     (parameters)
     (return_type
-      (primitive_type)))
+      (builtin_type)))
 )

@@ -45,6 +45,8 @@ const REAL_EXPONENT = token(seq(/[eE]/, optional(/[+-]/), DEC_DIGITS));
 module.exports = grammar({
   name: "jai",
 
+  conflicts: ($) => [],
+
   word: ($) => $.identifier,
 
   extras: ($) => [
@@ -128,10 +130,10 @@ module.exports = grammar({
 
     _type: ($) =>
       choice(
-        $.primitive_type,
+        $.builtin_type,
       ),
 
-    primitive_type: (_) =>
+    builtin_type: (_) =>
       token(choice(
         "bool",
         "int",
@@ -139,6 +141,7 @@ module.exports = grammar({
         ...[8, 16, 32, 64].map((n) => `u${n}`),
         ...[8, 16, 32, 64].map((n) => `s${n}`),
         ...[32, 64].map((n) => `float${n}`),
+        "string",
       )),
 
     // TODO: Is this a valid case?
@@ -208,7 +211,7 @@ module.exports = grammar({
     condition: ($) =>
       seq(
         optional("("),
-        $._expression,
+        choice($._expression, $.variable_declaration),
         optional(")"),
         optional("then"),
       ),
@@ -219,9 +222,43 @@ module.exports = grammar({
     _declaration: ($) =>
       choice(
         $.const_declaration,
-        $.procedure_declaration,
-        $._variable_declaration,
+        $.const_type_declaration,
+        $.enum_declaration,
         $.import_declaration,
+        $.procedure_declaration,
+        $.struct_declaration,
+        $.variable_declaration,
+      ),
+
+    const_declaration: ($) =>
+      seq(
+        field("name", $.identifier),
+        "::",
+        $._expression,
+        ";",
+      ),
+
+    // TODO: Needed this to disambiguate between proc/imports/const - feels inelegant - maybe revisit if I still care later
+    const_type_declaration: ($) =>
+      seq(
+        field("name", $.identifier),
+        ":",
+        field("type", $._type),
+        ":",
+        $._expression,
+        ";",
+      ),
+
+    // TODO: Not sure if this makes for the best highlighting - as we want all enum fields to be the same - maybe need a "fields"
+    enum_declaration: ($) =>
+      seq(
+        $.identifier,
+        "::",
+        "enum",
+        optional($._type),
+        "{",
+        repeat(choice($.const_declaration, seq($.identifier, ";"))),
+        "}",
       ),
 
     import_declaration: ($) =>
@@ -231,16 +268,6 @@ module.exports = grammar({
         "#import",
         optional(seq(",", field("modifier", choice("file", "dir", "string")))), // TODO: Not working in parse
         $.string_literal,
-        ";",
-      ),
-
-    const_declaration: ($) =>
-      seq(
-        field("name", $.identifier),
-        ":",
-        optional(field("type", $._type)),
-        ":",
-        $._expression,
         ";",
       ),
 
@@ -267,6 +294,16 @@ module.exports = grammar({
         $._type,
       ),
 
+    struct_declaration: ($) =>
+      seq(
+        $.identifier,
+        "::",
+        "struct",
+        "{",
+        repeat($._statement), // TODO: Start simple - constrain this later as it makes less sense
+        "}",
+      ),
+
     return_type: ($) =>
       seq(
         "->",
@@ -280,14 +317,20 @@ module.exports = grammar({
         "}",
       ),
 
-    // TODO: This and const were the first two rules I made - they're not very good or extensible
-    _variable_declaration: ($) =>
+    variable_declaration: ($) =>
       seq(
         field("name", $.identifier),
         ":",
-        field("type", $._type),
-        optional(seq("=", $.identifier)),
-        ";",
+        choice(
+          field("type", $._type),
+          seq(
+            optional(field("type", $._type)),
+            "=",
+            $._expression,
+          ),
+        ),
+        optional(";"), // TODO: Declarations should be split out from terminated statements I think (while loop)
+        // TODO: Alternatively, can call the labeled while condition something else (but have to handle key,val = ...)
       ),
 
     _expression_statement: ($) =>
@@ -352,7 +395,7 @@ module.exports = grammar({
             "operator",
             choice(
               "=",
-              ":=", // TODO: Should this be here - or under a declaration?
+              // ":=", // TODO: Should this be here - or under a declaration?
               "*=",
               "/=",
               "%=",
