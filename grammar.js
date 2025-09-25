@@ -37,15 +37,14 @@ const PREC = {
   SUBSCRIPT: 17,
 };
 
-const DEC_DIGITS = token(sep1(/[0-9]+/, /_+/));
-const HEX_DIGITS = token(sep1(/[0-9a-fA-F]+/, /_+/));
-const BIN_DIGITS = token(sep1(/[01]+/, /_+/));
-const REAL_EXPONENT = token(seq(/[eE]/, optional(/[+-]/), DEC_DIGITS));
+// TODO: Pull these further down
+// const DEC_DIGITS = token(sep1(/[0-9]+/, /_+/));
+// const HEX_DIGITS = token(sep1(/[0-9a-fA-F]+/, /_+/));
+// const BIN_DIGITS = token(sep1(/[01]+/, /_+/));
+// const REAL_EXPONENT = token(seq(/[eE]/, optional(/[+-]/), DEC_DIGITS));
 
 module.exports = grammar({
   name: "jai",
-
-  conflicts: ($) => [],
 
   word: ($) => $.identifier,
 
@@ -474,14 +473,14 @@ function commaSep1(rule) {
   return seq(rule, repeat(seq(",", rule)));
 }
 
-/**
- * Creates a rule to match one or more of the rules separated by an arbitrary separator
- *
- * @param {Rule} rule
- * @param {String} separator
- *
- * @returns {SeqRule}
- */
-function sep1(rule, separator) {
-  return seq(rule, repeat(seq(separator, rule)));
-}
+// /**
+//  * Creates a rule to match one or more of the rules separated by an arbitrary separator
+//  *
+//  * @param {Rule} rule
+//  * @param {String} separator
+//  *
+//  * @returns {SeqRule}
+//  */
+// function sep1(rule, separator) {
+//   return seq(rule, repeat(seq(separator, rule)));
+// }
