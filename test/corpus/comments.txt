@@ -1,4 +1,22 @@
 =================================
+Line comments
+=================================
+
+// Comment
+
+/// Still a comment
+
+//
+
+---
+
+(source_file
+  (line_comment)
+  (line_comment)
+  (line_comment)
+)
+
+=================================
 Block comments
 =================================
 
@@ -21,19 +39,32 @@ Block comments
 )
 
 =================================
-Line comments
+Nested block comments
+:skip
 =================================
 
-// Comment
+/*
+ * /* Single line */
+ */
 
-/// Still a comment
+/*   
+   Still multi-line  
+    /* 
+     * Nested comment
+     */ 
+ */
 
-//
+/*   
+  /* 
+ */
+
+ /*   
+  */ 
+ */
 
 ---
 
 (source_file
-  (line_comment)
-  (line_comment)
-  (line_comment)
+  (block_comment)
+  (block_comment)
 )

@@ -24,28 +24,26 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
-      
+
       - name: Set up tree-sitter
         uses: tree-sitter/setup-action/cli@v2
-      
+
       - name: Run parser and binding tests
         uses: tree-sitter/parser-test-action@v2
-        # with:
-          # test-rust: true
-      
+
       - name: Parse example files
         uses: tree-sitter/parse-action@v4
         id: parse-files
         with:
           files: examples/**
-      
+
       - name: Upload failures artifact
         uses: actions/upload-artifact@v4
         if: "!cancelled() && steps.parse-files.outcome == 'failure'"
         with:
           name: failures-${{runner.os}}
           path: ${{steps.parse-files.outputs.failures}}
-  
+
   fuzz:
     name: Fuzz scanner
     runs-on: ubuntu-latest

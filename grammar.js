@@ -334,9 +334,9 @@ module.exports = grammar({
 
     _expression_statement: ($) =>
       choice(
-        seq($._expression, ";"),
-        $.call_expression,
+        $.call_expression, // TODO: Put directly in expression?
         $.return_expression,
+        seq($._expression, ";"),
       ),
 
     _expression: ($) =>
@@ -348,6 +348,7 @@ module.exports = grammar({
         $.binary_expression,
         $.unary_expression,
         $.directive,
+        $.cast_expression,
       ),
 
     range_expression: ($) =>
@@ -367,14 +368,24 @@ module.exports = grammar({
       seq(
         field("procedure", $.identifier),
         field("arguments", $.arguments),
+        optional(";"),
       ),
 
     arguments: ($) =>
       seq(
         "(",
-        commaSep(seq($._expression)),
+        commaSep(choice($._expression, $.call_expression)), // TODO: I've really blundered the semi-colons - this should just be "expression"
         ")",
-        ";",
+      ),
+
+    cast_expression: ($) =>
+      seq(
+        "cast",
+        optional(seq(",", choice("force", "no_check", "trunc"))),
+        "(",
+        $._type,
+        ")",
+        $._expression,
       ),
 
     return_expression: ($) =>

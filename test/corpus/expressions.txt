@@ -117,3 +117,62 @@ Range Operations
     (integer_literal)
     (integer_literal))
 )
+
+=================================
+Call expressions
+=================================
+
+foo();
+
+foo(1);
+
+foo(1, "2", bar, type_of(bar));
+
+---
+
+(source_file
+  (call_expression
+    (identifier)
+    (arguments))
+
+  (call_expression
+    (identifier)
+    (arguments
+      (integer_literal)))
+
+  (call_expression
+    (identifier)
+    (arguments
+      (integer_literal)
+      (string_literal
+        (string_content))
+      (identifier)
+      (call_expression
+        (identifier)
+        (arguments
+          (identifier)))))
+)
+
+=================================
+Cast expressions
+=================================
+
+a = cast(u8) b;
+
+a = cast,no_check(u8) b;
+
+---
+
+(source_file
+  (assignment_expression
+    (identifier)
+    (cast_expression
+      (builtin_type)
+      (identifier)))
+
+ (assignment_expression
+    (identifier)
+    (cast_expression
+      (builtin_type)
+      (identifier)))
+)
