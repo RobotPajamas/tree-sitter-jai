@@ -1,0 +1,151 @@
+=================================
+While loops
+=================================
+
+while (true) {
+  // Foo 
+}
+
+while true {
+  break;
+}
+
+while (true) continue;
+
+while j_loop := j < 2 {
+  while true {
+    break j_loop;
+  }
+}
+
+---
+
+(source_file
+  (while_statement
+    (condition
+      (boolean_literal))
+    (line_comment))
+
+  (while_statement
+    (condition
+      (boolean_literal))
+    (break_statement))
+
+  (while_statement
+    (condition
+      (boolean_literal))
+    (continue_statement))
+
+  (while_statement
+    (condition
+      (variable_declaration
+        (identifier)
+        (binary_expression
+          (identifier)
+          (integer_literal))))
+
+    (while_statement
+      (condition
+        (boolean_literal))
+      (break_statement
+        (identifier))))
+)
+
+=================================
+For loops
+:skip
+=================================
+
+for 1 .. 2 {
+  // Range
+}
+
+for < 2 .. 1 {
+    // Backwards
+}
+
+for c .. d-1 foo();
+
+for array {
+  foo(it_index, it);
+}
+
+---
+
+(source_file
+  (for_statement
+    (range_expression
+      (integer_literal)
+      (integer_literal))
+    (line_comment))
+
+  (for_statement
+    (identifier)
+    (range_expression
+      (integer_literal)
+      (integer_literal))
+    (line_comment))
+
+  (for_statement
+    (range_expression
+      (integer_literal)
+      (expression?))
+    (call_expression
+      (identifier)
+      (arguments
+        (identifier)
+        (identifier))))
+)
+
+=================================
+Labeled For loops
+:skip
+=================================
+
+for foo: 1 .. 2 {
+  // Named range
+}
+
+for value, i: numbers {
+  foo(i, value);
+}
+
+for outer: numbers {
+  for inner: numbers {
+    continue;
+    continue outer;
+    break;
+    break inner;
+  }
+}
+
+---
+
+(source_file
+  (for_statement
+    (range_expression
+      (integer_literal)
+      (integer_literal))
+    (line_comment))
+  
+  (for_statement
+    (identifier)
+    (call_expression
+      (identifier)
+      (arguments
+        (identifier)
+        (identifier))))
+  
+  (for_statement
+    (identifier)
+    (identifier)
+    (for_statement
+      (identifier)
+      (identifier)
+      (continue_statement)
+      (continue_statement 
+        (identifier))
+      (break_statement)
+      (break_statement
+        (identifier))))
+)

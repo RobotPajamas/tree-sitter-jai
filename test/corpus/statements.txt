@@ -1,0 +1,12 @@
+main :: () {
+  return 1;
+}
+
+main :: () {
+  return true;
+}
+
+main :: () {
+  return 1 + 1 - foo.bar;
+}
+

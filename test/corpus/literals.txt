@@ -1,0 +1,78 @@
+=================================
+Boolean literals
+=================================
+
+true;
+false;
+
+---
+
+(source_file
+  (boolean_literal)
+  (boolean_literal)
+)
+
+
+=================================
+Integer literals
+=================================
+
+0;
+123;
+0x7f;
+0xdead_BEEF;
+0Xdead_BEEF;
+0b101101101;
+0B101101101;
+-1_234_567_89;
+
+---
+
+(source_file
+  (integer_literal)
+  (integer_literal)
+  (integer_literal)
+  (integer_literal)
+  (integer_literal)
+  (integer_literal)
+  (integer_literal)
+  (integer_literal)
+)
+
+=================================
+Float literals
+=================================
+
+123.456;
+2.;
+0h8000_0000_0000_0000;
+0h7f7f_7f7f;
+-123.456;
+
+---
+
+(source_file
+  (float_literal)
+  (float_literal)
+  (float_literal)
+  (float_literal)
+  (float_literal)
+)
+
+=================================
+String literals
+=================================
+
+"";
+"abc";
+"\"foo\"";
+"/* foo bar */ foo bar";
+
+---
+
+(source_file
+  (string_literal)
+  (string_literal (string_content))
+  (string_literal (escape_sequence) (string_content) (escape_sequence))
+  (string_literal (string_content))
+)
